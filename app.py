@@ -49,6 +49,7 @@ class MyApi(Api):
     def __init__(self, *args, **kwargs):
         super(MyApi, self).__init__(*args, **kwargs)
         self.representations = {
+            'text': output_text,
             'application/json': output_json,
         }
 
@@ -61,12 +62,16 @@ length = 175
 
 article_parser = reqparse.RequestParser()
 article_parser.add_argument('url', type=unicode, help='The url of the site to scrape')
-
+article_parser.add_argument('format', type=unicode, help='Format of article in json/text', default='json')
+article_parser.add_argument('markdownify', type=bool, help='Should the text of the article be markdown', default=True)
+article_parser.add_argument('include_summary', type=bool, help='Should a nlp summary be included', default=False)
+article_parser.add_argument('redirect', type=unicode, help='Should redirect to another program', default='')
 
 class ArticleSimple(Resource):
     def get(self):
         args = article_parser.parse_args()
         url = args['url']
+        output_format = args['format']
         article = Article(url)
         article.download()
 
@@ -174,9 +179,46 @@ class ArticleSimple(Resource):
                 'additional_data': article.additional_data,
             }
 
+            if output_format == 'json':
+                return output_json(data, 200, {})
 
-            return output_json(data, 200, {})
+            if output_format == 'text':
+                output = u'---\n'
+                output += u'link: %s\n' % (article.url)
+                output += u'title: %s\n' % (article.title)
+                output += u'authors: %s\n' % (u', '.join(article.authors))
+                output += u'keywords: %s\n' % (u', '.join(article.keywords))
+                output += u'---\n\n'
+                if args['include_summary']:
+                    output += u'# Summary\n\n%s\n' % (article.summary)
 
+                output += text
+
+                r = args.get('redirect')
+                if r and r in ['nvalt', 'notsey']:
+                    title = u'%s - %s' % (article.title, u', '.join(article.authors))
+                    title = title.encode('utf-8')
+                    output = output.encode('utf-8')
+
+                    if r == 'nvalt':
+                        opts = {
+                            'txt': output,
+                            'title': title,
+                        }
+                        opts = '&'.join(['%s=%s' % (key, quote(val)) for key, val in opts.items()])
+                        url = 'nvalt://make/?' + opts
+
+                    if r == 'notsey':
+                        opts = {
+                            'text': output,
+                            'name': title,
+                        }
+                        opts = '&'.join(['%s=%s' % (key, quote(val)) for key, val in opts.items()])
+                        url = 'notesy://x-callback-url/append?' + opts
+
+                    return make_response(redirect(url))
+
+                return output_text(output, 200, {'Content-Type': 'text'})
 
 
 
