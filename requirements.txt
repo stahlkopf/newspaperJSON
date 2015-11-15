@@ -23,3 +23,6 @@ feedfinder2==0.0.1
 python-dateutil==2.4.0
 wsgiref==0.1.2
 html2text==3.200.3
+numpy
+goose-extractor==1.0.25
+unidecode==0.04.18

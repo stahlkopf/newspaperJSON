@@ -1,0 +1,17 @@
+#!/bin/bash
+#runs the python code with the appropriate parameters
+
+filename=tf_idf.py
+flag1=-text
+
+arg1="Back in March, Yahoo bought a startup called Summly for $30 million. Before Yahoo shut it down, Summly was a news aggregation app for smartphones. The deal got a lot of attention because Summly's CEO is 17-year-old Nick D'Aloisio. We found the deal strange from the get-go. Three big reasons: D'Aloisio is still going to high school in London, thousands of miles away from Yahoo's California headquarters. He is not moving. Summly didn't have a lot of users or any revenues. According to Summly's own Web site, the technology behind the app was built by an organization called SRI International, not by the startup's employees. Then, today we learned that the Summly team also did not build the Summly app - a company called Somo did. Somo is the U.K.'s largest independent mobile marketing agency. In conclusion: Buying Summly, Yahoo bought a startup with an app that - - not many people used - employed no technical geniuses or design mavens. So why, exactly, did Yahoo buy Summly? We finally have an answer! Acquiring Summly seems to have been an almost incidental side effect of a deal Yahoo made with SRI for a piece of summarization technology. A source tells us that Yahoo has agreements in place with SRI for knowledge transfer, and the acquisition of IP, code, and technology. Until Yahoo bought it, SRI International held equity in Summly. SRI once held equity in another startup that was acquired by a big Silicon Valley company. That was Siri, which was funded by SRI International's venture arm, and was later acquired by Apple. And indeed, inside Yahoo, Summly is called Yahoo's Siri. A source close to Yahoo says that CEO Marissa Mayer believes summarization technology is going to be huge for Yahoo as it builds personalized news feeds into mobile versions of its core experiences, including Yahoo Finance and Yahoo Sports. Yahoo believes summarization technology will be especially important because phones have much smaller screens than the desktop computers where Yahoo products are mostly used now. The job of implementing this technology at Yahoo will not be given to anyone from Summly, including its young CEO.  That task now belongs to Yahoo's mobile organization, run by Adam Cahan . According to reports, D'Aloisio is required to stay at Yahoo for another 17 months. In reporting all this, the last thing we want to do is take any credit away from Nick D'Aloisio.  Though Summly's own Web site once said: SRI International, with the help of the Summly team, built the summarization technology behind Summly, we are told that D'Aloisio invented the product's original technology. In a statement provided to us by a Yahoo spokesperson, an SRI spokesperson says: Basically, Nick developed the original code for Summly. After the original product was built, SRI supported development of the technology and provided artificial intelligence expertise in machine learning and natural language processing. Further, D'Aloisio deserves credit for outsourcing technology development and app development to the right firms, and coalescing their work into a product that made him millions. Plenty of brilliant entrepreneurs before him rode a similar skill for curation to the top of the industry."
+
+#arg4=input.txt
+
+flag2=-c
+arg2=./CorpusFolder/
+flag3=-tagged
+arg3=True
+
+
+time python $filename $flag1 $arg1 #$flag4 $arg4

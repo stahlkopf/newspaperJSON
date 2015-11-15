@@ -1,0 +1,12 @@
+Summarizing web pages have recently gained much attention
+from researchers. Until now two main types of approaches have
+been proposed for this task: content- and context-based methods.
+Both of them assume fixed content and characteristics of web
+documents without considering their dynamic nature. However
+the volatility of information published on the Internet argue for
+the implementation of more time-aware techniques. This paper
+proposes a new approach towards automatic web page description,
+which extends the concept of a web page by the temporal
+dimension. Our method provides a broader view on web
+document summarization and can complement the existing
+techniques.
