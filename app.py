@@ -57,7 +57,7 @@ api = MyApi(app)
 
 LANGUAGE = "english"
 SENTENCES_COUNT = 5
-length = 175
+length = 134
 
 
 article_parser = reqparse.RequestParser()
