@@ -72,7 +72,7 @@ class ArticleSimple(Resource):
         args = article_parser.parse_args()
         url = args['url']
         output_format = args['format']
-        article = Article(url)
+        article = Article(url, keep_article_html=True)
         article.download()
 
         if article.html == "":
